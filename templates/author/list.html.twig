@@ -1,0 +1,36 @@
+{% if authors is not defined or authors is empty %}
+<p> aucun auteur dispo </p>
+{% endif %}
+
+<table border = "1">
+<tr>
+<th>ID</th>
+<th>Image</th>
+<th>username</th>
+<th>email</th>
+<th>number of books</th>
+<th>details</th>
+</tr>
+
+{% for author in authors %}
+<tr>
+<td>{{author.id}} </td>
+<td><img src= "{{author.picture}}" alt ="{{author.username}}"></td>
+<td>{{ author.username |upper }} </td>
+<td>{{author.email}} </td>
+<td>{{author.nb_books}} </td>
+<td> <a href="{{ path('app_author_details', {'id': author.id}) }}"> details </a> </td>
+</tr>
+{% endfor %}
+
+</table>
+
+
+<h1> Le nombre des auteurs : {{authors|length}}</h1>
+
+{% set S=0 %}
+{% for auth in authors %}
+{% set S= S + auth.nb_books %}
+{% endfor %}
+
+<h2> la somme des livres = {{S}} </h2>
