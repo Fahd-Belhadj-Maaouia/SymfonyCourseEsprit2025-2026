@@ -87,6 +87,7 @@ public function authorDetails($id): Response
         'author' => $author
     ]);
 }
+
 #[Route('/listAuthor', name: 'app_author_list')]
 public function show(AuthorRepository $repoAuthor) : Response
 {
@@ -107,6 +108,7 @@ $author1 = new Author();
     $em->flush();
     return $this->redirectToRoute('app_author_list');
 }
+
 #[Route('/Add', name: 'app_author_Add')]
 public function Add(EntityManagerInterface $em,Request $request):Response
 {
@@ -124,6 +126,7 @@ public function Add(EntityManagerInterface $em,Request $request):Response
         'f'=>$form->createView()
     ]);
 }
+
     #[Route('/Edit/{id}', name: 'app_author_Edit')]
     public function Edit($id,EntityManagerInterface $em, Request $request, AuthorRepository $repo):Response
     {
@@ -134,15 +137,16 @@ public function Add(EntityManagerInterface $em,Request $request):Response
         if($form->isSubmitted() && $form->isValid())
         {
             $em->persist($author);
-            $em->flush($author);
+            $em->flush();
             return $this->redirectToRoute('app_author_list');
         }
          return $this->render('author/edit.html.twig',[
         'f'=>$form->createView()
     ]);
 
-        
     }
+
+
     #[Route('/Delete/{id}', name: 'app_author_Delete')]
     public function Delete($id,EntityManagerInterface $em, AuthorRepository $repo):Response
     {
@@ -155,9 +159,7 @@ public function Add(EntityManagerInterface $em,Request $request):Response
         $em->flush();
         return $this->redirectToRoute('app_author_list');
 
-        
     }
 
 
 }
-   

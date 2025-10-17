@@ -15,11 +15,8 @@
 <td>{{b.publicationDate | date('M-d-Y')}}</td>
 <td>{{b.published}}</td>
 <td>{{b.author.username}}</td>
-<td></td>
+<td><a href="{{path('app_book_update',{'id':b.id})}}">Update</a></td>
+<td><a href="{{path('app_book_delete',{'id':b.id})}}">Delete</a></td>
 </tr>
 {% endfor %}
 </table>
-
-
-
-
